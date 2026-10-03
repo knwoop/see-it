@@ -1,0 +1,16 @@
+%% flowchart.mmd: process flow, branching.
+%% - Direction TD.
+%% - Decisions as {question?} diamonds, branches labeled with the condition value.
+%% - One happy path straight down; error exits to the side.
+%% - Numbered nodes: "(N) label".
+flowchart TD
+  start(["(1) request in"]) --> valid{"(2) valid?"}
+  valid -- yes --> work["(3) process"]
+  valid -- no --> reject["(4) 400"]
+  work --> cache[("(5) + cache write")]:::added
+  cache --> done(["200"])
+
+  classDef added fill:#dafbe1,stroke:#1a7f37,stroke-width:2px,color:#1f2328
+  classDef removed fill:#ffebe9,stroke:#cf222e,stroke-width:2px,stroke-dasharray:5 3,color:#1f2328
+  classDef changed fill:#fff8c5,stroke:#9a6700,stroke-width:2px,color:#1f2328
+  classDef boundary fill:#eaeef2,stroke:#8c959f,stroke-dasharray:3 3,color:#57606a

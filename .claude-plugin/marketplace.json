@@ -1,0 +1,13 @@
+{
+  "name": "see-it",
+  "owner": {
+    "name": "knwoop"
+  },
+  "plugins": [
+    {
+      "name": "see-it",
+      "source": "./",
+      "description": "Diagrams-only comprehension aid for reviewers: docs, code, PRs, Kubernetes, Terraform."
+    }
+  ]
+}

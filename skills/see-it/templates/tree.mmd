@@ -1,0 +1,12 @@
+%% tree.mmd: config hierarchy, override precedence.
+%% - Direction TD. Root is the lowest-precedence source; leaves win.
+%% - Edge label "overrides" only where precedence is not obvious from layout.
+%% - Show the effective value on the winning node, e.g. "replicas: 4".
+flowchart TD
+  defaults["(1) chart defaults<br/>replicas: 1"] --> env["(2) values-prod.yaml<br/>replicas: 3"]
+  env --> cli["(3) --set<br/>replicas: 4"]:::changed
+
+  classDef added fill:#dafbe1,stroke:#1a7f37,stroke-width:2px,color:#1f2328
+  classDef removed fill:#ffebe9,stroke:#cf222e,stroke-width:2px,stroke-dasharray:5 3,color:#1f2328
+  classDef changed fill:#fff8c5,stroke:#9a6700,stroke-width:2px,color:#1f2328
+  classDef boundary fill:#eaeef2,stroke:#8c959f,stroke-dasharray:3 3,color:#57606a

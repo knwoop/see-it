@@ -1,0 +1,25 @@
+%% common.mmd: shared styles and the legend. Edit this file to restyle every diagram.
+%% 1. Copy the classDef lines below into every flowchart, stateDiagram-v2, and classDiagram.
+%% 2. When a file has any diff styling, put this whole diagram (minus %% comments) first,
+%%    under the heading "## Legend". The legend does not count toward the 1-3 diagrams.
+%%    Keep only the legend nodes for classes the file actually uses.
+%% Label markers (always pair color with a marker, never color alone):
+%%   added "+ "   removed "- "   changed "~ "
+%%   replace, destroy then create "-/+ "   replace, create then destroy "+/- "
+%%   boundary: no marker, grey only
+%% Node numbers: "(N) " at the start of a label, before the marker, e.g. "(3) + retry loop".
+%% N maps to item N of the source list under the diagram. Numbers restart at 1 per diagram.
+%% Removed edges: dashed arrow (-.->) plus linkStyle <index> stroke:#cf222e.
+%% linkStyle counts edges in declaration order from 0, so declare removed edges last.
+flowchart TB
+  added["+ added"]:::added
+  removed["- removed"]:::removed
+  changed["~ changed"]:::changed
+  replace["-/+ replaced"]:::replace
+  boundary["outside scope"]:::boundary
+
+  classDef added fill:#dafbe1,stroke:#1a7f37,stroke-width:2px,color:#1f2328
+  classDef removed fill:#ffebe9,stroke:#cf222e,stroke-width:2px,stroke-dasharray:5 3,color:#1f2328
+  classDef changed fill:#fff8c5,stroke:#9a6700,stroke-width:2px,color:#1f2328
+  classDef replace fill:#fff1e5,stroke:#bc4c00,stroke-width:4px,stroke-dasharray:2 2,color:#1f2328
+  classDef boundary fill:#eaeef2,stroke:#8c959f,stroke-dasharray:3 3,color:#57606a

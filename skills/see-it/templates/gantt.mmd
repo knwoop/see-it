@@ -1,0 +1,11 @@
+%% gantt.mmd: lifecycle over time when durations or overlap matter.
+%% - dateFormat X (seconds) with axisFormat %M:%S for relative time.
+%% - Task names are short phrases.
+%% - Diff styling: "active" = added or changed, "crit" = removed or replaced. Always add the label marker too.
+gantt
+  dateFormat X
+  axisFormat %M:%S
+  section Pod
+    (1) startup probe   :a1, 0, 30s
+    (2) + readiness gate :active, a2, after a1, 10s
+    (3) serving         :a3, after a2, 60s

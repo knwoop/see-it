@@ -1,0 +1,10 @@
+{
+  "name": "see-it",
+  "version": "0.1.0",
+  "description": "Turn docs, code, diffs, Kubernetes manifests, and Terraform into Mermaid diagrams so a reviewer sees what something is, fast. Diagrams only, no prose.",
+  "author": {
+    "name": "knwoop"
+  },
+  "repository": "https://github.com/knwoop/see-it",
+  "keywords": ["diagram", "mermaid", "review", "kubernetes", "terraform"]
+}

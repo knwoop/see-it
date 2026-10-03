@@ -1,0 +1,20 @@
+%% resource-graph.mmd: infra topology.
+%% - Direction LR. One subgraph per boundary: cluster, namespace, VPC, account, module.
+%% - Node label: "kind/name" on the first line, key values below with <br/>.
+%% - Edges: traffic or reference direction, labeled with port or relation when it matters.
+%% - Value-only changes: show "field: old → new" on the node with the changed class.
+%% - Terraform replace uses the replace class and "-/+ " marker, never changed.
+flowchart LR
+  user((client)):::boundary
+  subgraph ns["namespace: shop"]
+    ing["(1) Ingress/shop"] --> svc["(2) Service/web<br/>port 80"]
+    svc --> dep["(3) ~ Deployment/web<br/>replicas: 2 → 4"]:::changed
+    hpa["(4) + HPA/web"]:::added -.-> dep
+  end
+  user --> ing
+
+  classDef added fill:#dafbe1,stroke:#1a7f37,stroke-width:2px,color:#1f2328
+  classDef removed fill:#ffebe9,stroke:#cf222e,stroke-width:2px,stroke-dasharray:5 3,color:#1f2328
+  classDef changed fill:#fff8c5,stroke:#9a6700,stroke-width:2px,color:#1f2328
+  classDef replace fill:#fff1e5,stroke:#bc4c00,stroke-width:4px,stroke-dasharray:2 2,color:#1f2328
+  classDef boundary fill:#eaeef2,stroke:#8c959f,stroke-dasharray:3 3,color:#57606a

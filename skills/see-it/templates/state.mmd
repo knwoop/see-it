@@ -1,0 +1,21 @@
+%% state.mmd: state changes.
+%% - Use stateDiagram-v2.
+%% - States are nouns; transitions are event or condition phrases.
+%% - Numbered states: alias with a label, e.g. Running: (2) Running
+%% - Diff styling: classDef lines from common.mmd, then "class X added".
+%%   Removed transitions cannot be dashed here; prefix the label with "- " instead.
+stateDiagram-v2
+  [*] --> Pending
+  Pending: (1) Pending
+  Pending --> Running: scheduled
+  Running: (2) Running
+  Running --> Retrying: + transient error
+  Retrying: (3) + Retrying
+  Retrying --> Running: backoff elapsed
+  Running --> [*]: done
+
+  classDef added fill:#dafbe1,stroke:#1a7f37,stroke-width:2px,color:#1f2328
+  classDef removed fill:#ffebe9,stroke:#cf222e,stroke-width:2px,stroke-dasharray:5 3,color:#1f2328
+  classDef changed fill:#fff8c5,stroke:#9a6700,stroke-width:2px,color:#1f2328
+  classDef boundary fill:#eaeef2,stroke:#8c959f,stroke-dasharray:3 3,color:#57606a
+  class Retrying added

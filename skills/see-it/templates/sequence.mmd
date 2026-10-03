@@ -1,0 +1,30 @@
+%% sequence.mmd: who calls whom, in what order.
+%% - Participants ordered caller -> callee, left to right.
+%% - autonumber on. Each message number N maps to source list item N.
+%% - Errors: one alt branch only. Omit minor branches.
+%% - External systems: declare as actor, or wrap in a grey box.
+%% - Note: labels only, never sentences.
+%% - Diff styling (no classDef in sequence diagrams): wrap messages in rect blocks and
+%%   prefix labels with markers. added rgba(46,160,67,0.18), removed rgba(207,34,46,0.18),
+%%   changed rgba(212,167,44,0.22). Removed messages use a dashed arrow (-->>).
+sequenceDiagram
+  autonumber
+  participant C as Client
+  participant S as Service
+  box rgba(140,149,159,0.15) External
+    participant P as Payment API
+  end
+
+  C->>S: request
+  S->>P: charge
+  rect rgba(46,160,67,0.18)
+    S->>S: + idempotency check
+  end
+  alt charge failed
+    P-->>S: error
+    S-->>C: 502
+  else ok
+    P-->>S: receipt
+    S-->>C: 200
+  end
+  Note over S,P: timeout 5s

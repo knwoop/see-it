@@ -1,0 +1,20 @@
+%% class.mmd: types, inheritance, interfaces.
+%% - Show public members only, unless the subject is the private shape.
+%% - Interfaces: <<interface>> annotation.
+%% - Numbered types: class Foo["(1) Foo"]
+%% - Diff styling: classDef lines from common.mmd, then append ":::added" to the class declaration.
+classDiagram
+  class Store["(1) Store"] {
+    <<interface>>
+    +Get(key) Value
+    +Put(key, Value)
+  }
+  class MemStore["(2) MemStore"]
+  class RedisStore["(3) + RedisStore"]:::added
+  Store <|.. MemStore
+  Store <|.. RedisStore
+
+  classDef added fill:#dafbe1,stroke:#1a7f37,stroke-width:2px,color:#1f2328
+  classDef removed fill:#ffebe9,stroke:#cf222e,stroke-width:2px,stroke-dasharray:5 3,color:#1f2328
+  classDef changed fill:#fff8c5,stroke:#9a6700,stroke-width:2px,color:#1f2328
+  classDef boundary fill:#eaeef2,stroke:#8c959f,stroke-dasharray:3 3,color:#57606a
