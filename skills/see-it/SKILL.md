@@ -10,7 +10,7 @@ Turn the input into diagrams that show what it is, from the big picture down to 
 1. Read the input from wherever it is (local files, a PR or commit, a doc, a URL, pasted text). Ask the user if something important is unclear. Do not change anything.
 2. Draw it as described below. `templates/` has a starting point for each type and shared styles in `common.mmd`.
 3. Write the diagrams to `_diagrams/<short-name>.md` at the repo root: a `## <question>?` title per diagram, the mermaid block, and links to the sources.
-4. For a diff, show changes in one diagram: green added, red dashed removed, yellow changed.
+4. For a diff, show changes in one diagram first: green added, red dashed removed, yellow changed. Then add an as-is diagram and a to-be diagram to compare, with the same node IDs in both.
 5. Check it renders with `node <this skill dir>/scripts/validate.mjs <file>`, fix until it passes, and reply with the file path.
 
 ## How to draw
