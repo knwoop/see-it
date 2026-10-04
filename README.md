@@ -1,6 +1,6 @@
 # see-it
 
-A Claude Code skill that helps developers understand code under review. It turns a PR, diff, code, design doc, or infra config (Kubernetes, Terraform) into Mermaid diagrams. Diagrams only, no prose.
+A Claude Code skill that turns text, code, a PR or diff, a design doc, config, or anything else into Mermaid diagrams you can read at a glance. It starts with an overview and draws each detailed part as its own diagram one level down. Diagrams only, no prose.
 
 ## Install
 
@@ -11,7 +11,7 @@ A Claude Code skill that helps developers understand code under review. It turns
 
 ## Use
 
-Ask Claude Code "see it", "diagram this PR", or "help me understand this change". The skill writes `_diagrams/<name>.md` at the repo root and replies with the path.
+Ask Claude Code "see it", "diagram this", or "help me understand this diff". The skill writes `_diagrams/<name>.md` at the repo root and replies with the path.
 
 ## Customize
 

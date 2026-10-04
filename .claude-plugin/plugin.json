@@ -1,7 +1,7 @@
 {
   "name": "see-it",
   "version": "0.1.0",
-  "description": "Turn PRs, diffs, code, design docs, Kubernetes manifests, and Terraform into Mermaid diagrams so a reviewer sees what a change is, fast. Diagrams only, no prose.",
+  "description": "Turn text, code, diffs, docs, or config into layered Mermaid diagrams, from overview to detail. Diagrams only, no prose.",
   "author": {
     "name": "knwoop"
   },
