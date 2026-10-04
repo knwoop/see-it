@@ -1,8 +1,4 @@
 %% dependency.mmd: dependencies, blast radius.
-%% - Direction LR. Arrow means "depends on" (A --> B: A uses B).
-%% - The subject is the only node with a thick border.
-%% - Blast radius: everything that reaches the subject, one hop by default, two at most.
-%% - Out-of-scope modules: boundary class.
 flowchart LR
   api["(1) api"] --> auth["(2) auth"]
   worker["(3) worker"] --> auth

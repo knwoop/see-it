@@ -1,42 +1,14 @@
 ---
 name: see-it
-description: Turn a doc excerpt, code, a file, several files, a PR or diff, a PDF or document, Kubernetes manifests (raw, Helm, Kustomize), or Terraform into 1-3 Mermaid diagrams so a reviewer understands what it is, fast. Diagrams only, no prose. Use when the user says "see it", "see-it this", "diagram this", "draw this", "visualize this PR", "visualize this doc", "visualize this manifest", "help me understand this diff", "what does this change look like", "as-is to-be", or "before and after diagram".
+description: Turn text, code, a PR or diff, a PDF, config, or anything else into Mermaid diagrams so a reviewer sees what it is, fast. Diagrams only, no prose. Use when the user says "see it", "diagram this", "draw this", "visualize this", or "help me understand this diff".
 ---
 
 # see-it
 
-Produce diagrams that show **what** something is. Never why, never alternatives, never risks.
+Turn the input into diagrams that show what it is. Diagrams only, no prose.
 
-## Read-only
-
-This skill never changes infrastructure or remote state. Never run `terraform apply`, `terraform destroy`, `terraform import`, `terraform state *`, `terraform init` in the user's tree, `kubectl apply`, `kubectl delete`, `kubectl edit`, `helm install`, `helm upgrade`, `helm uninstall`, or anything else that writes state or remote resources. The only file this skill writes in the user's repo is `_diagrams/<target-slug>.md`. Scratch work (base checkouts, rendered manifests, plan files) goes in a temp directory.
-
-## Workflow
-
-1. **Identify the target and slug.** See [references/output.md](references/output.md#slug).
-2. **Gather facts.** Decide where to read the input from: the local tree, a PR or commit (`gh`, `git show <sha>:path`), a PDF, pasted text, or a URL. Use what matches the target the user named; the local tree may be stale or on another branch. Read surrounding files when needed. For a change, get both sides (before and after). Check official docs for unfamiliar resources, APIs, or tool behavior. For Helm, Kustomize, or Terraform, run the read-only tools in [references/infra.md](references/infra.md) and build the diagrams from their output. If a tool is missing or fails, use the file diff and append ` (from diff only)` to that diagram's title.
-   When the choice changes the diagrams and you cannot settle it from the input (which revision, which environment's values, which part of a long document), ask the user.
-3. **Choose 1-3 diagrams.** Follow [references/diagram-selection.md](references/diagram-selection.md).
-4. **Draw from the templates.** Start every diagram from `templates/<type>.mmd` and copy the `classDef` lines from `templates/common.mmd`. Follow the `%%` conventions in each template, then strip all `%%` comments from the output.
-5. **Write the file** to `_diagrams/<target-slug>.md` at the repo root, overwriting any previous run. Follow the text rules in [references/output.md](references/output.md).
-6. **Validate** and fix until it passes:
-   ```sh
-   node <this skill dir>/scripts/validate.mjs _diagrams/<target-slug>.md
-   ```
-   The validator renders every block with mermaid-cli and checks titles, prose, numbering, and source links. Also look at each diagram once: if it is not readable at a glance (over ~15 nodes, or crossing edges you have to trace), split it.
-7. **Reply with the file path only.** No summary, no commentary.
-
-## Templates
-
-| Subject | Template |
-|---|---|
-| Shared styles, legend, markers, numbering | `templates/common.mmd` |
-| State changes | `templates/state.mmd` |
-| Who calls whom, in what order | `templates/sequence.mmd` |
-| Data shape and relations | `templates/er.mmd` |
-| Types, inheritance, interfaces | `templates/class.mmd` |
-| Process flow, branching | `templates/flowchart.mmd` |
-| Dependencies, blast radius | `templates/dependency.mmd` |
-| Config hierarchy, override precedence | `templates/tree.mmd` |
-| Lifecycle over time | `templates/timeline.mmd`, `templates/gantt.mmd` |
-| Infra topology | `templates/resource-graph.mmd` |
+1. Read the input from wherever it is (local files, a PR, a PDF, a URL, pasted text). Ask the user if something important is unclear. Do not change anything.
+2. Draw as few diagrams as it takes, in whatever Mermaid types fit best. `templates/` has a starting point for each type and shared styles in `common.mmd`.
+3. Write them to `_diagrams/<short-name>.md` at the repo root: a `## <question>?` title per diagram, the mermaid block, and links to the sources.
+4. For a diff, show changes in one diagram: green added, red dashed removed, yellow changed.
+5. Check it renders with `node <this skill dir>/scripts/validate.mjs <file>`, fix until it passes, and reply with the file path.
