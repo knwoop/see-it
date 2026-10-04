@@ -18,4 +18,5 @@ Turn the input into diagrams that show what it is, from the big picture down to 
 - Start with one overview at the coarsest level where the subject is visible.
 - Keep each diagram readable at a glance. When a part has more detail, collapse it into one node, then draw that node as the next diagram, one level down (system → components → code). Stop when it no longer helps.
 - Pick the type by what the reader needs to know: states → `stateDiagram-v2`, call order → `sequenceDiagram`, data → `erDiagram`, types → `classDiagram`, flow → `flowchart`, dependencies → `flowchart LR`, infra → `flowchart` + `subgraph`, over time → `timeline`.
+- With 3 or more diagrams, start with a `## Map`: a small flowchart of the diagram titles, each edge labeled with the node it expands.
 - Labels are short phrases, never sentences.
