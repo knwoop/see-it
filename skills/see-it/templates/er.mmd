@@ -1,10 +1,4 @@
 %% er.mmd: data shape and relations.
-%% - Entities in UPPER_SNAKE or the source's own table names.
-%% - Attributes: type and name only; PK/FK/UK markers allowed.
-%% - Relationship labels: short verb phrases.
-%% - Numbering: no node numbers. Put the source list in entity order instead.
-%% - Diff styling: classDef lines from common.mmd, then "class ENTITY added".
-%%   Changed attributes: prefix the attribute comment with the marker, e.g. "~ nullable".
 erDiagram
   CUSTOMER ||--o{ ORDER : places
   ORDER ||--|{ LINE_ITEM : contains

@@ -1,8 +1,4 @@
 %% flowchart.mmd: process flow, branching.
-%% - Direction TD.
-%% - Decisions as {question?} diamonds, branches labeled with the condition value.
-%% - One happy path straight down; error exits to the side.
-%% - Numbered nodes: "(N) label".
 flowchart TD
   start(["(1) request in"]) --> valid{"(2) valid?"}
   valid -- yes --> work["(3) process"]
