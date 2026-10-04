@@ -126,12 +126,12 @@ for (const s of diagrams) {
 
   for (const x of s.sources) {
     if (/^https?:\/\//.test(x.url)) continue;
-    if (!/#L\d+(-L\d+)?$/.test(x.url)) {
-      errors.push(`line ${x.line}: source link must end in #L<line> or #L<a>-L<b>: ${x.url}`);
+    if (!/#(L\d+(-L\d+)?|page=\d+)$/.test(x.url)) {
+      errors.push(`line ${x.line}: local source link must end in #L<line>, #L<a>-L<b>, or #page=<n>: ${x.url}`);
       continue;
     }
     const target = resolve(mdDir, x.url.replace(/#.*$/, ""));
-    if (!existsSync(target)) warnings.push(`line ${x.line}: source file not found (ok only for deleted files): ${x.url}`);
+    if (!existsSync(target)) errors.push(`line ${x.line}: source file not found locally; link to the commit permalink instead: ${x.url}`);
   }
 }
 

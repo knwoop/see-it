@@ -1,6 +1,6 @@
 ---
 name: see-it
-description: Turn a doc excerpt, code, a file, several files, a PR or diff, Kubernetes manifests (raw, Helm, Kustomize), or Terraform into 1-3 Mermaid diagrams so a reviewer understands what it is, fast. Diagrams only, no prose. Use when the user says "see it", "see-it this", "diagram this", "draw this", "visualize this PR", "visualize this doc", "visualize this manifest", "help me understand this diff", "what does this change look like", "as-is to-be", or "before and after diagram".
+description: Turn a doc excerpt, code, a file, several files, a PR or diff, a PDF or document, Kubernetes manifests (raw, Helm, Kustomize), or Terraform into 1-3 Mermaid diagrams so a reviewer understands what it is, fast. Diagrams only, no prose. Use when the user says "see it", "see-it this", "diagram this", "draw this", "visualize this PR", "visualize this doc", "visualize this manifest", "help me understand this diff", "what does this change look like", "as-is to-be", or "before and after diagram".
 ---
 
 # see-it
@@ -14,7 +14,8 @@ This skill never changes infrastructure or remote state. Never run `terraform ap
 ## Workflow
 
 1. **Identify the target and slug.** See [references/output.md](references/output.md#slug).
-2. **Gather facts.** Read the input and any surrounding files needed to understand it. For a change, get both sides (before and after). For Helm, Kustomize, or Terraform, run the read-only tools in [references/infra.md](references/infra.md) and build the diagrams from their output. If a tool is missing or fails, use the file diff and append ` (from diff only)` to that diagram's title.
+2. **Gather facts.** Decide where to read the input from: the local tree, a PR or commit (`gh`, `git show <sha>:path`), a PDF, pasted text, or a URL. Use what matches the target the user named; the local tree may be stale or on another branch. Read surrounding files when needed. For a change, get both sides (before and after). Check official docs for unfamiliar resources, APIs, or tool behavior. For Helm, Kustomize, or Terraform, run the read-only tools in [references/infra.md](references/infra.md) and build the diagrams from their output. If a tool is missing or fails, use the file diff and append ` (from diff only)` to that diagram's title.
+   When the choice changes the diagrams and you cannot settle it from the input (which revision, which environment's values, which part of a long document), ask the user.
 3. **Choose 1-3 diagrams.** Follow [references/diagram-selection.md](references/diagram-selection.md).
 4. **Draw from the templates.** Start every diagram from `templates/<type>.mmd` and copy the `classDef` lines from `templates/common.mmd`. Follow the `%%` conventions in each template, then strip all `%%` comments from the output.
 5. **Write the file** to `_diagrams/<target-slug>.md` at the repo root, overwriting any previous run. Follow the text rules in [references/output.md](references/output.md).

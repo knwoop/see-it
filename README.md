@@ -1,6 +1,6 @@
 # see-it
 
-A Claude Code skill that turns a doc excerpt, code, a PR or diff, Kubernetes manifests (raw, Helm, Kustomize), or Terraform into 1-3 Mermaid diagrams. It helps a reviewer understand **what** something is, fast. Diagrams only, no prose. Rationale, alternatives, and risks are out of scope.
+A Claude Code skill that turns a doc excerpt, code, a PR or diff, a PDF or document, Kubernetes manifests (raw, Helm, Kustomize), or Terraform into 1-3 Mermaid diagrams. It helps a reviewer understand **what** something is, fast. Diagrams only, no prose. Rationale, alternatives, and risks are out of scope.
 
 ## Install
 
@@ -25,7 +25,7 @@ The skill writes `_diagrams/<target-slug>.md` at the repo root and replies with 
 
 - Titles are the question each diagram answers.
 - Labels are nouns or short phrases.
-- Numbered nodes link to `file#Lline` in a source list under each diagram.
+- Numbered nodes link to their source in a list under each diagram: a local file, a commit permalink, a PDF page, or a URL, whichever the reader can open.
 - Changes get a merged diagram first: green `+` added, red dashed `-` removed, yellow `~` changed, orange `-/+` Terraform replace, grey boundary.
 
 ## Read-only

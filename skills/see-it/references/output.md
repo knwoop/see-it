@@ -55,8 +55,17 @@ Inside diagrams:
 
 - Number the nodes a reviewer would want to jump to: `(N) ` at the start of the label. Sequence diagrams use `autonumber` and every message gets a source.
 - Numbers restart at 1 in each diagram.
-- Source item N links to where node N is defined: `N. [path#Lx](../path#Lx)` or a range `#Lx-Ly`. Paths are relative to `_diagrams/`, so they start with `../`.
-- For a change, use line numbers from the after side. For removed nodes, use the before side's line.
+- Source item N links to where node N is defined, in a place the reader can open. Link text is `path#Lx` (or `#Lx-Ly`, `#page=N`).
+- Pick the link target by where the content actually is:
+
+| Source | Link target |
+|---|---|
+| File in the local tree, same content as reviewed | Relative from `_diagrams/`: `../path#Lx` |
+| PR, commit, or branch not checked out locally | Permalink at the commit SHA: `https://github.com/<owner>/<repo>/blob/<sha>/path#Lx` |
+| PDF | `../path.pdf#page=N` or its URL with `#page=N` |
+| Web page or doc URL | The URL, with a heading anchor when one exists |
+
+- For a change, use line numbers from the after side (head SHA). For removed nodes, use the before side (base SHA).
 - ER diagrams cannot carry numbers. List one source per entity in declaration order.
 - Excerpt with no known origin file: no numbers, no source list.
 - Boundary nodes are not numbered.
