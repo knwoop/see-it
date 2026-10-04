@@ -7,7 +7,7 @@
     {
       "name": "see-it",
       "source": "./",
-      "description": "Diagrams-only comprehension aid for reviewers: docs, code, PRs, Kubernetes, Terraform."
+      "description": "Diagrams-only review aid for developers: PRs, diffs, code, design docs, Kubernetes, Terraform."
     }
   ]
 }
