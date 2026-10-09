@@ -1,10 +1,14 @@
-%% flowchart.mmd: process flow, branching.
+%% flowchart.mmd: process flow, branching. One diamond per condition; failures are dashed side paths.
 flowchart TD
   start(["(1) request in"]) --> valid{"(2) valid?"}
-  valid -- yes --> work["(3) process"]
+  valid -- yes --> cached{"(3) cache hit?"}
   valid -- no --> reject["(4) 400"]
-  work --> cache[("(5) + cache write")]:::added
-  cache --> done(["200"])
+  cached -- yes --> done(["200"])
+  cached -- no --> fetch["(5) fetch upstream"]
+  fetch --> store[("(6) + cache write")]:::added
+  fetch -. timeout .-> stale["(7) serve stale"]
+  store --> done
+  stale --> done
 
   classDef added fill:#dafbe1,stroke:#1a7f37,stroke-width:2px,color:#1f2328
   classDef removed fill:#ffebe9,stroke:#cf222e,stroke-width:2px,stroke-dasharray:5 3,color:#1f2328
