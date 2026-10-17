@@ -28,3 +28,4 @@ Styles live in `skills/see-it/templates/`. Edit `common.mmd` to change colors fo
 | [Doc excerpt](examples/doc-excerpt/job-lifecycle.md) | [_diagrams/job-lifecycle-states.md](_diagrams/job-lifecycle-states.md) |
 | [Code change](examples/code-change/) | [_diagrams/examples-code-change.md](_diagrams/examples-code-change.md) |
 | [Kubernetes change](examples/k8s-change/) | [_diagrams/examples-k8s-change.md](_diagrams/examples-k8s-change.md) |
+| [Architecture doc](examples/architecture-doc/ticketing.md) | [_diagrams/examples-architecture-doc.md](_diagrams/examples-architecture-doc.md) |
