@@ -1,6 +1,6 @@
 {
   "name": "see-it",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Turn text, code, diffs, docs, or config into layered Mermaid diagrams, from overview to detail. Diagrams only, no prose.",
   "author": {
     "name": "knwoop"
