@@ -1,4 +1,4 @@
-%% class.mmd: types, inheritance, interfaces.
+%% class.mmd: types, inheritance, interfaces, composition, multiplicity.
 classDiagram
   class Store["(1) Store"] {
     <<interface>>
@@ -6,9 +6,17 @@ classDiagram
     +Put(key, Value)
   }
   class MemStore["(2) MemStore"]
-  class RedisStore["(3) + RedisStore"]:::added
+  class TTLStore["(3) TTLStore"] {
+    +Expire(key)
+  }
+  class RedisStore["(4) + RedisStore"]:::added
+  class Pool["(5) + Pool"]:::added
+  class Conn["(6) + Conn"]:::added
   Store <|.. MemStore
   Store <|.. RedisStore
+  MemStore <|-- TTLStore
+  RedisStore "1" *-- "1" Pool
+  Pool "1" *-- "1..*" Conn
 
   classDef added fill:#dafbe1,stroke:#1a7f37,stroke-width:2px,color:#1f2328
   classDef removed fill:#ffebe9,stroke:#cf222e,stroke-width:2px,stroke-dasharray:5 3,color:#1f2328
