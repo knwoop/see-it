@@ -1,0 +1,18 @@
+%% component.mmd: runtime components and the APIs between them. Arrows go from caller to the component that provides the API; labels name the API.
+flowchart LR
+  admin["(1) AdminView"]:::component
+  view["(2) PublicView"]:::component
+  svc["(3) CatalogService"]:::component
+  users["(4) UserDirectory"]:::component
+  persist["(5) PersistenceService"]:::component
+  db[("(6) CatalogDB")]:::component
+  idp["Identity provider"]:::boundary
+  admin -- "admin API" --> svc
+  view -- "read API" --> svc
+  svc -- "auth API" --> users
+  users -- "OIDC" --> idp
+  svc -- "persistence API" --> persist
+  persist -- "SQL" --> db
+
+  classDef component fill:#ddf4ff,stroke:#0969da,stroke-width:2px,color:#1f2328
+  classDef boundary fill:#eaeef2,stroke:#8c959f,stroke-dasharray:3 3,color:#57606a
