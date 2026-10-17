@@ -1,0 +1,17 @@
+%% context.mmd: system context. The system in the middle, people and external systems around it, each edge labeled with the data exchanged.
+flowchart LR
+  customer(["(1) Customer"]):::person
+  ops(["(2) Support staff"]):::person
+  sys["(3) Order Service"]:::system
+  pay["Payment provider"]:::boundary
+  mail["Email service"]:::boundary
+  customer -- "order, address" --> sys
+  sys -- "order status" --> customer
+  ops -- "refund request" --> sys
+  sys -- "charge, ~50/min" --> pay
+  pay -- "payment result" --> sys
+  sys -- "receipt" --> mail
+
+  classDef system fill:#ddf4ff,stroke:#0969da,stroke-width:3px,color:#1f2328
+  classDef person fill:#ffffff,stroke:#57606a,stroke-width:2px,color:#1f2328
+  classDef boundary fill:#eaeef2,stroke:#8c959f,stroke-dasharray:3 3,color:#57606a
