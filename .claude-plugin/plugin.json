@@ -6,5 +6,5 @@
     "name": "knwoop"
   },
   "repository": "https://github.com/knwoop/see-it",
-  "keywords": ["diagram", "mermaid", "review", "kubernetes", "terraform"]
+  "keywords": ["diagram", "mermaid", "visualization", "architecture", "code-review", "documentation"]
 }
